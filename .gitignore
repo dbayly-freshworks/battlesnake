@@ -1,0 +1,11 @@
+*.DS_Store
+*.pyc
+battlesnake
+.idea
+.vscode
+app/testingAnswers.json
+app/testingData.json
+app/trainingAnswers.json
+app/trainingData.json
+app/training_1
+saved_model
