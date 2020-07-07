@@ -4,15 +4,15 @@
     },
     "turn": 1,
     "board": {
-      "height": 5,
-      "width": 5,
+      "height": 12,
+      "width": 12,
       "food": [
       ],
       "snakes": [
         {
           "id": "snake-id-string",
           "name": "Sneky Snek",
-          "health": 10,
+          "health": 100,
           "body": [
           ]
         }
@@ -21,7 +21,7 @@
     "you": {
       "id": "snake-id-string",
       "name": "Sneky Snek",
-      "health": 10,
+      "health": 100,
       "body": [
       ]
     }

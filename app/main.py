@@ -2,9 +2,17 @@ import json
 import os
 import random
 import bottle
-
+from game import *
 from api import ping_response, start_response, move_response, end_response
 
+# TensorFlow and tf.kerasi
+import tensorflow as keras
+import tensorflow as tf
+
+# Helper libraries
+import numpy as np
+model = ""
+probability_model = ""
 
 @bottle.route('/')
 def index():
@@ -52,16 +60,10 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
-    """
-    TODO: Using the data from the endpoint request object, your
-            snake AI must choose a direction to move in.
-    """
     print(json.dumps(data))
-
-    directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
-
+    inputs = genInputs(listMap,data)
+    direction = pickMove(inputs)
+    print(direction)
     return move_response(direction)
 
 
@@ -88,3 +90,31 @@ if __name__ == '__main__':
         port=os.getenv('PORT', '8080'),
         debug=os.getenv('DEBUG', True)
     )
+    model = tf.keras.models.load_model('active_model/nextgen_1')
+    probability_model = tf.keras.Sequential([model, 
+                                            tf.keras.layers.Softmax()])
+
+def pickMove(inputs):
+    # direction = random.choice(directions)
+    directions = []
+    values = probability_model.predict([inputs])
+    #print(values)
+    index = getMaxIndex(values[0])
+    #print(index)
+    # print(index)
+    if(index >= 8):
+        directions.append('right')
+        index = index - 8
+    if(index >= 4):
+        directions.append('left')
+        index = index - 4
+    if(index >= 2):
+        directions.append('down')
+        index = index -2
+    if(index ==1):
+        directions.append('up')
+
+    if(len(directions)==0):
+        # print('no moves left, killing self')
+        return random.choice(['up','down','left','right'])
+    return random.choice(directions)

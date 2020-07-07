@@ -116,7 +116,7 @@ def tick(data,move,filledMap):
             newData["board"]["food"].append(choice)
             possibleFoodLocations.remove(choice)
             newData["you"]["body"].append(oldTail)
-            newData["you"]["health"]=10
+            newData["you"]["health"]=100
     for index in range(len(newData["board"]["snakes"])): 
         if newData["board"]["snakes"][index]["id"] == newData["you"]["id"]:
             newData["board"]["snakes"][index] = newData["you"]

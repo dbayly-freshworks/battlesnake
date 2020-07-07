@@ -19,9 +19,10 @@ trainingAnswers= json.loads(open("trainingAnswers.json","r").read())
 model = keras.Sequential([
     keras.layers.Dense(13),
     keras.layers.Dense(128, activation='relu'),
+    # keras.layers.Dense(128, activation='relu'),
     keras.layers.Dense(16)
 ])
-print(len(trainingData[0]))
+print(len(trainingAnswers))
 model.compile(optimizer='adam',
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
@@ -30,7 +31,7 @@ model.compile(optimizer='adam',
 #                                                  verbose=1)
 model.fit(trainingData, 
           trainingAnswers,  
-          epochs=10)
+          epochs=50)
         #   validation_data=(testingData,testingAnswers),
         #   callbacks=[cp_callback])
 
@@ -38,4 +39,4 @@ model.fit(trainingData,
 
 # print('\nTest accuracy:', test_acc)
 
-model.save('saved_model/my_model') 
+model.save('saved_model/nextgen_1') 
