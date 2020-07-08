@@ -134,6 +134,17 @@ def getPossibleFoodLocations(data):
             if(flag):
                 locationList.append({'x':x,'y':y})
     return locationList
+
+def getMaxIndex(arr):
+    maxValue = arr[0]
+    index = 0
+    counter = 0
+    for x in arr:
+        if(maxValue < x):
+            maxValue = x
+            index = counter
+        counter = counter + 1
+    return index
 # def main():
 #     with open('./app/map.json') as map_json:
 #         data = json.load(map_json)
